@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pemesanan Hotel</title>
+</head>
+<body>
+  <h2>Form Pemesanan Hotel</h2>
+  <form method="POST" action="/" enctype="multipart/form-data">
+    <label>Nama Lengkap:</label><br>
+    <input type="text" name="nama" required><br>
+
+    <label>No HP:</label><br>
+    <input type="text" name="no_hp" required><br>
+
+    <label>Jumlah Kamar:</label><br>
+    <input type="number" name="jumlah_kamar" required><br>
+
+    <label>Tipe Kamar:</label><br>
+    <select name="tipe_kamar">
+      <option value="Standard">Standard</option>
+      <option value="Deluxe">Deluxe</option>
+      <option value="Suite">Suite</option>
+    </select><br>
+
+    <label>Check-in (YYYY-MM-DD):</label><br>
+    <input type="date" name="checkin" required><br>
+
+    <label>Check-out (YYYY-MM-DD):</label><br>
+    <input type="date" name="checkout" required><br><br>
+
+    <button type="submit">Simpan</button>
+  </form>
+
+  {% if id_booking %}
+    <h3>Data berhasil disimpan. ID Booking: {{ id_booking }}</h3>
+    <h4>QR Pembayaran:</h4>
+    <img src="{{ url_for('static', filename='qrcodes/payment_{}.png'.format(id_booking)) }}">
+    <h4>QR Akses Kamar:</h4>
+    <img src="{{ url_for('static', filename='qrcodes/access_{}.png'.format(id_booking)) }}">
+  {% endif %}
+</body>
+</html>
